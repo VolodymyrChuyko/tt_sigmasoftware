@@ -44,6 +44,6 @@
     "*.js": "npm run lint",
     "*.ts": "npm run lint",
     "*.html": "npm run htmllint",
-    "*.css": "npm run stylelintstylelint"
+    "*.css": "npm run stylelint"
   }
 }
