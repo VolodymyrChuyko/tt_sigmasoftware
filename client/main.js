@@ -28,10 +28,10 @@ window.addEventListener('load', () => {
     </tr>
     </tr>
     <tr style="border: 1px solid #000">
-      <td style="border: 1px solid">1</td>
-      <td style="border: 1px solid">2</td>
-      <td style="border: 1px solid">3</td>
-      <td style="border: 1px solid">4</td>
+      <td style="border: 1px solid; text-align: center">1</td>
+      <td style="border: 1px solid; text-align: center">2</td>
+      <td style="border: 1px solid; text-align: center">3</td>
+      <td style="border: 1px solid; text-align: center">4</td>
     </tr>
   </table>
   `;
