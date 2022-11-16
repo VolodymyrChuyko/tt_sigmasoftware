@@ -1,1 +1,7 @@
-/* styles */
+body {
+  height: 100vh;
+}
+
+.test-content {
+  width: 30px;
+}

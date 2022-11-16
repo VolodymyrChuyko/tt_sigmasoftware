@@ -1,15 +1,11 @@
-import express from 'express';
+'use strict';
 
-const app = express();
-const port = 8080; // default port to listen
+import { createServer } from './server';
 
-// define a route handler for the default home page
-app.get('/', (req, res) => {
-  res.send('Hello world!');
-});
+const port = 8080;
+const server = createServer();
 
-// start the Express server
-app.listen(port, () => {
+server.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`server started at http://localhost:${port}`);
 });
