@@ -1,12 +1,12 @@
-import createButton from './scripts/buttons/showpopup.js';
+/* eslint-disable no-undef */
+import createPopupButton from './scripts/buttons/showpopup.js';
 import createModal from './scripts/modal.js';
 
-// eslint-disable-next-line no-console
 console.log('-----------Start script---------');
 
 window.addEventListener('load', () => {
   const body = document.querySelector('body');
-  const button = createButton();
+  const button = createPopupButton();
   const modal = createModal();
 
   body.append(button);
@@ -35,4 +35,24 @@ window.addEventListener('load', () => {
     </tr>
   </table>
   `;
+
+  try {
+    console.log('--------------AFTER LOAD. Ad Units', pbjs.adUnits);
+
+    console.log('Ad unit code:', pbjs.adUnits.map((unit) => unit.code));
+
+    console.log('getAdserverTargetingForAdUnitCode:',
+      pbjs.getAdserverTargetingForAdUnitCode(pbjs.adUnits[0].code));
+
+    console.log('getAdserverTargetingForAdUnitCode:',
+      pbjs.getAdserverTargetingForAdUnitCode(pbjs.adUnits[0].code));
+
+    console.log('Ad unit bidders:',
+      pbjs.adUnits
+        .map((unit) => unit.bids
+          .map((bid) => bid.bidder)
+          .filter((bidder, i, bidders) => bidders.indexOf(bidder) === i)));
+  } catch (error) {
+    console.log('Prebid.js not found');
+  }
 });

@@ -1,6 +1,6 @@
 import setStyles from '../helpers.js';
 
-export default function createButton() {
+export default function createPopupButton() {
   const button = document.createElement('button');
   const buttonStyles = {
     position: 'fixed',
