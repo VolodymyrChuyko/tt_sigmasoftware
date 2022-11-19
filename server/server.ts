@@ -7,13 +7,14 @@ export const createServer = () => {
   const app = express();
 
   app.use(cors());
+  app.use(express.json());
 
-  app.get('/', (req, res) => {
-    const { url } = req.query;
+  app.post('/', (req, res) => {
+    const { url } = req.body;
 
     console.log(url);
-
-    res.send({ data: 'Server: interception received successfully' });
+    console.log('');
+    res.send({ data: 'Server received interception successfully' });
   });
 
   return app;

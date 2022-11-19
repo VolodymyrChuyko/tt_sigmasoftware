@@ -6,10 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="main.css" />
+    <script
+      async
+      src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+    ></script>
+    <script>
+      window.googletag = window.googletag || { cmd: [] };
+      googletag.cmd.push(function () {
+        googletag
+          .defineSlot(
+            '/6355419/Travel/Europe/France/Paris',
+            [300, 250],
+            'div-1',
+          )
+          .addService(googletag.pubads());
+        googletag.enableServices();
+      });
+    </script>
     <script type="module" src="main.js"></script>
   </head>
   <body>
     <h1>Hello, world!</h1>
+    <div id="div-1">
+      <script>
+        googletag.cmd.push(function () {
+          googletag.display('div-1');
+        });
+      </script>
+    </div>
     <div class="test-content">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores maiores
       error temporibus, incidunt voluptates doloribus unde enim pariatur sit

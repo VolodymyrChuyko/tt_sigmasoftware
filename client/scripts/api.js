@@ -1,13 +1,19 @@
-export default async function sendInterceptedUrl(interceptedUrl) {
+export default async function sendInterceptedUrl(interceptedUrl, nativeFetch) {
   const serverUrl = 'http://localhost:8080/';
-  const requestUrl = serverUrl + '?url=' + interceptedUrl;
+  const data = { url: interceptedUrl };
 
   try {
-    const response = await fetch(requestUrl, { method: 'GET' });
+    const response = await nativeFetch(serverUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
     const json = await response.json();
 
-    return json.data;
+    return 'SCRIPT: ' + json.data;
   } catch {
-    return 'Script: unable to send data to the server';
+    return 'SCRIPT: unable to send data to the server';
   }
 }

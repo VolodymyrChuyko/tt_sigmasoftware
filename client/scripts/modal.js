@@ -13,7 +13,7 @@ export default function createModal() {
   const modalStyles = {
     display: 'none',
     position: 'fixed',
-    'z-index': 999999,
+    'z-index': 999999999999999,
     top: '0',
     left: '0',
     width: '100vw',

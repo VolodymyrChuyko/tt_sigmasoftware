@@ -7,6 +7,7 @@ export default function createIframe() {
     width: '900px',
     height: '500px',
     border: 'none',
+    padding: '12px 0',
   };
 
   iframe.setAttribute('title', 'Ad slots statistic');

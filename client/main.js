@@ -1,58 +1,47 @@
-/* eslint-disable no-undef */
 import createPopupButton from './scripts/buttons/showpopup.js';
 import createModal from './scripts/modal.js';
+import prepareInitSlotsInfo from './scripts/initslotsinfo.js';
+import prepareShownSlotsInfo from './scripts/shownslots.js';
+import initInterceptor from './scripts/interceptor.js';
 
-console.log('-----------Start script---------');
+initInterceptor();
 
 window.addEventListener('load', () => {
-  const body = document.querySelector('body');
-  const button = createPopupButton();
-  const modal = createModal();
+  console.log('SCRIPT: detecting Prebid.js...', !!window['_pbjsGlobals']);
 
-  body.append(button);
-  body.append(modal);
+  if (window['_pbjsGlobals']) {
+    const prebidLib = window['_pbjsGlobals'][0];
+    const { adUnits, getAllWinningBids, getAllPrebidWinningBids }
+      = window[prebidLib];
 
-  button.onclick = () => {
-    modal.style.display = 'block';
-  };
+    console.log('SCRIPT: pbjs object', window[prebidLib]);
+    console.log('SCRIPT: Ad Units', ...adUnits);
 
-  const adStatsFrame = document.querySelector('#Ad_slots_statistic');
+    const body = document.querySelector('body');
+    const button = createPopupButton();
+    const modal = createModal();
 
-  adStatsFrame.contentDocument.body.innerHTML = `
-  <table style="width: 100%; padding: 12px 0; border-collapse: collapse; border: 1px solid">
-    <tr style="border: 1px solid #000">
-      <th style="border: 1px solid">1</th>
-      <th style="border: 1px solid">2</th>
-      <th style="border: 1px solid">3</th>
-      <th style="border: 1px solid">4</th>
-    </tr>
-    </tr>
-    <tr style="border: 1px solid #000">
-      <td style="border: 1px solid; text-align: center">1</td>
-      <td style="border: 1px solid; text-align: center">2</td>
-      <td style="border: 1px solid; text-align: center">3</td>
-      <td style="border: 1px solid; text-align: center">4</td>
-    </tr>
-  </table>
-  `;
+    body.append(button);
+    body.append(modal);
 
-  try {
-    console.log('--------------AFTER LOAD. Ad Units', pbjs.adUnits);
+    const adStatsFrame = document.querySelector('#Ad_slots_statistic');
+    const initSlotsInfo = prepareInitSlotsInfo(adUnits);
 
-    console.log('Ad unit code:', pbjs.adUnits.map((unit) => unit.code));
+    adStatsFrame.contentDocument.body.append(initSlotsInfo);
 
-    console.log('getAdserverTargetingForAdUnitCode:',
-      pbjs.getAdserverTargetingForAdUnitCode(pbjs.adUnits[0].code));
+    button.onclick = () => {
+      const shownSlotsInfo = prepareShownSlotsInfo(getAllWinningBids());
 
-    console.log('getAdserverTargetingForAdUnitCode:',
-      pbjs.getAdserverTargetingForAdUnitCode(pbjs.adUnits[0].code));
+      if (adStatsFrame.contentDocument.body.children.length > 1) {
+        adStatsFrame.contentDocument.body.lastChild.remove();
+      }
+      adStatsFrame.contentDocument.body.append(shownSlotsInfo);
+      modal.style.display = 'block';
+      // ==================================================== test logs start
+      console.log('pbjs.getAllWinningBids():', getAllWinningBids());
 
-    console.log('Ad unit bidders:',
-      pbjs.adUnits
-        .map((unit) => unit.bids
-          .map((bid) => bid.bidder)
-          .filter((bidder, i, bidders) => bidders.indexOf(bidder) === i)));
-  } catch (error) {
-    console.log('Prebid.js not found');
+      console.log('pbjs.getAllPrebidWinningBids():', getAllPrebidWinningBids());
+      // ==================================================== test logs end
+    };
   }
 });

@@ -1,6 +1,6 @@
 import setStyles from './helpers.js';
 
-export function createTable(tableRows) {
+export default function createTable(tableContent) {
   const table = document.createElement('table');
   const tableStyles = {
     width: '100%',
@@ -11,6 +11,8 @@ export function createTable(tableRows) {
 
   setStyles(table, tableStyles);
 
+  const tableRows = createTableRows(tableContent);
+
   tableRows.forEach((tableRow) => {
     table.append(tableRow);
   });
@@ -18,18 +20,22 @@ export function createTable(tableRows) {
   return table;
 }
 
-export function createTableRow(rowCellsContent, cellTag) {
-  const tableRow = document.createElement('table');
+function createTableRows(rowsContent) {
+  return rowsContent.map((rowContent, index) => {
+    const tableRow = document.createElement('tr');
 
-  rowCellsContent.forEach((cellContent) => {
-    const cell = document.createElement(cellTag);
+    rowContent.forEach((cellContent) => {
+      const cellTag = index === 0 ? 'th' : 'td';
+      const cell = document.createElement(cellTag);
 
-    cell.style.border = '1px solid #000';
-    cell.style.textAlign = 'center';
-    cell.textContent = cellContent;
+      cell.style.border = '1px solid #000';
+      cell.style.textAlign = 'left';
+      cell.style.padding = '4px';
+      cell.textContent = cellContent;
 
-    tableRow.append(cell);
+      tableRow.append(cell);
+    });
+
+    return tableRow;
   });
-
-  return tableRow;
 }

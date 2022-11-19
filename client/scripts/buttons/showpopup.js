@@ -4,7 +4,7 @@ export default function createPopupButton() {
   const button = document.createElement('button');
   const buttonStyles = {
     position: 'fixed',
-    'z-index': 999999,
+    'z-index': 999999999999999,
     bottom: '10px',
     right: '10px',
     height: '100px',
