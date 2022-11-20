@@ -1,4 +1,4 @@
-# Test Task Solution
+# Ad slots stats
 
 The custom script that gets information about ad slots on the website using Prebid.js and Google Publisher Tag (GPT)
 Also, it intercepts URL addresses of all the `fetch` requests from the page and sends them to the custom server
@@ -20,20 +20,21 @@ The custom server logs received URL addresses in the console
   <details>
     <summary>tutorial</summary>
 
-    Install and open Requestly extension
-    STEP #1 Add new rule
+  Install and open Requestly extension
+  
+  STEP #1 Add new rule
     ![Add new rule](./description/requestly_1.PNG)
 
-    STEP #2 Choose Insert Scripts option
+  STEP #2 Choose Insert Scripts option
     ![Choose Insert Scripts option](./description/requestly_2.PNG)
 
-    STEP #3 Type the name of your rule
+  STEP #3 Type the name of your rule
     ![Type the name of your rule](./description/requestly_3.PNG)
 
-    STEP #4 Insert the code from the `build/client/bundle.js`
+  STEP #4 Insert the code from the `build/client/bundle.js`
     ![Insert the code from the `build/client/bundle.js`](./description/requestly_4.PNG)
 
-    STEP #5 Confirm creating the rule
+  STEP #5 Confirm creating the rule
     ![Confirm creating the rule](./description/requestly_5.PNG)
   </details>
 
