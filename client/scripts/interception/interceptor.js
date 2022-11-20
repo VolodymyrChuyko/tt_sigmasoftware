@@ -4,7 +4,8 @@ export default function initInterceptor() {
   const fetchDescriptor = Object.getOwnPropertyDescriptor(window, 'fetch');
   const nativeFetch = fetchDescriptor.value;
   const customFetch = async(...args) => {
-    const [requestUrl] = args;
+    const [request] = args;
+    const requestUrl = request.slice(0, request.indexOf('?'));
 
     sendInterceptedUrl(requestUrl, nativeFetch);
 
