@@ -1,4 +1,4 @@
-import setStyles from './helpers.js';
+import setStyles from '../setstyles.js';
 
 export default function createIframe() {
   const iframe = document.createElement('iframe');

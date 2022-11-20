@@ -1,9 +1,9 @@
 import createTable from './table.js';
 
-export default function prepareInitSlotsInfo(adUnits) {
+export default function prepareInitSlotsInfo(adUnits, slots) {
   const initSlotsInfo = document.createElement('div');
   const tableTitle = document.createElement('h1');
-  const tableRows = prepareInitSlotsTableData(adUnits);
+  const tableRows = prepareInitSlotsTableData(adUnits, slots);
   const table = createTable(tableRows);
 
   tableTitle.textContent = 'Initial ad slots configuration';
@@ -13,12 +13,18 @@ export default function prepareInitSlotsInfo(adUnits) {
   return initSlotsInfo;
 }
 
-function prepareInitSlotsTableData(adUnits) {
-  const tableHeaders = ['adUnit code', 'Bidders', 'Sizes'];
+function prepareInitSlotsTableData(adUnits, slots) {
+  const tableHeaders = ['adUnit code', 'Bidders', 'Sizes', 'adUnit path'];
+  const paths = getPaths(slots);
 
   return [
     tableHeaders,
-    ...adUnits.map((unit) => [unit.code, getBidders(unit), getSizes(unit)]),
+    ...adUnits.map((unit) => [
+      unit.code,
+      getBidders(unit),
+      getSizes(unit),
+      paths[unit.code],
+    ]),
   ];
 }
 
@@ -39,4 +45,16 @@ function getSizes(adUnit) {
   if (Object.prototype.hasOwnProperty.call(adUnit.mediaTypes, 'video')) {
     return adUnit.mediaTypes.video.playerSize.join('x');
   }
+}
+
+function getPaths(slots) {
+  const pathsOfUnits = slots.reduce(
+    (paths, slot) => ({
+      ...paths,
+      [slot.getSlotElementId()]: slot.getAdUnitPath(),
+    }),
+    {},
+  );
+
+  return pathsOfUnits;
 }

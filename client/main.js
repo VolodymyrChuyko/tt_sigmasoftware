@@ -1,7 +1,7 @@
 import createPopupButton from './scripts/buttons/showpopup.js';
-import createModal from './scripts/modal.js';
-import prepareInitSlotsInfo from './scripts/initslotsinfo.js';
-import prepareShownSlotsInfo from './scripts/shownslots.js';
+import createModal from './scripts/modalwindow/modal.js';
+import prepareInitSlotsInfo from './scripts/tables/initslotsinfo.js';
+import prepareShownSlotsInfo from './scripts/tables/shownslotsinfo.js';
 import initInterceptor from './scripts/interceptor.js';
 
 initInterceptor();
@@ -9,13 +9,24 @@ initInterceptor();
 window.addEventListener('load', () => {
   console.log('SCRIPT: detecting Prebid.js...', !!window['_pbjsGlobals']);
 
-  if (window['_pbjsGlobals']) {
+  if (window['_pbjsGlobals'] && window.googletag) {
     const prebidLib = window['_pbjsGlobals'][0];
     const { adUnits, getAllWinningBids, getAllPrebidWinningBids }
       = window[prebidLib];
+    const gptSlots = window.googletag.pubads().getSlots();
 
     console.log('SCRIPT: pbjs object', window[prebidLib]);
     console.log('SCRIPT: Ad Units', ...adUnits);
+
+    console.log(
+      'SCRIPT: slots',
+      gptSlots.map((slot) => slot.getAdUnitPath()),
+    );
+
+    console.log(
+      'SCRIPT: slots',
+      gptSlots.map((slot) => slot.getSlotElementId()),
+    );
 
     const body = document.querySelector('body');
     const button = createPopupButton();
@@ -25,7 +36,7 @@ window.addEventListener('load', () => {
     body.append(modal);
 
     const adStatsFrame = document.querySelector('#Ad_slots_statistic');
-    const initSlotsInfo = prepareInitSlotsInfo(adUnits);
+    const initSlotsInfo = prepareInitSlotsInfo(adUnits, gptSlots);
 
     adStatsFrame.contentDocument.body.append(initSlotsInfo);
 

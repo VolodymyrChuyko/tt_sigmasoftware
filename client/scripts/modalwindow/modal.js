@@ -1,7 +1,7 @@
-import setStyles from './helpers.js';
-import createContainer from './content.js';
-import createCloseButton from './buttons/close.js';
-import createXcloseButton from './buttons/xclose.js';
+import setStyles from '../setstyles.js';
+import createContainer from './container.js';
+import createCloseButton from '../buttons/close.js';
+import createXcloseButton from '../buttons/xclose.js';
 import createIframe from './iframe.js';
 
 export default function createModal() {
