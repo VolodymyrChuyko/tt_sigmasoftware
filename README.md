@@ -1,25 +1,49 @@
 # Test Task Solution
 
+The custom script that gets information about ad slots on the website using Prebid.js and Google Publisher Tag (GPT)
+Also, it intercepts URL addresses of all the `fetch` requests from the page and sends them to the custom server
+The custom server logs received URL addresses in the console
+
+![ad slots info](./description/popupwindow.PNG)
+
 ## Bulding script
 
-- source files are in `client/`
-- `index.html` and `main.css` are only used for test purposes
-- `main.js` uses modules from `client/scripts`
-- to make the `bundle.js` run `npm run bundle` in the terminal. The build/client/`bundle.js` will be generated.
+- source script's files are in the `client/` directory
+- the result script code is `build/client/bundle.js`
+- run `npm run bundle` in the terminal to generate the `build/client/bundle.js`
+
+## Injecting the script into the web page
+
+- use [Requestly](https://app.requestly.io/rules/my-rules) to inject the script into the web page.
+  To do that just follow this
+      <details>
+        <summary>tutorial</summary>
+
+        Install and open Requestly extension
+        STEP #1
+        ![Add new rule](./description/requestly_1.PNG)
+
+        STEP #2
+        ![Choose Insert Scripts option](./description/requestly_2.PNG)
+
+        STEP #3
+        ![Type the name of your rule](./description/requestly_3.PNG)
+
+        STEP #4
+        ![Insert the code from the `build/client/bundle.js`](./description/requestly_4.PNG)
+
+        STEP #5
+        ![Confirm creating the rule](./description/requestly_5.PNG)
+      </details>
+
+- On opening every web page the script will automatically detect if there are Prebid.js and Google Publisher Tag (GPT)
+  If it finds them it will display the `Show popup` button in the bottom right corner of the web page
+  ![Show popoup button](./description/showpopupbutton.PNG)
+- Press this button to open popup windiw with information about ad slots on the page
 
 ## Starting server
 
-- use `npm start` command to build and start the server
-- `npm run dev` command could be used to the start server in development mode
-
-## Development process
-
-- implement server - done!
-- implement script button - done!
-- implement script iframe - done!
-- adapt the script for injection - done!
-- implement client-server api - done!
-- implement script stats table - done!
-- implement getting initial slot configuration - in the process...
-- implement getting SSP list - done!
-- implement request interception - done!
+- source server's files are in the `server/` directory
+- the result server code is in the `build/server/` directory
+- to build and start the server use `npm start` command
+- to start the server in development mode use `npm run dev` command
