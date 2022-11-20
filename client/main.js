@@ -2,7 +2,7 @@ import createPopupButton from './scripts/buttons/showpopup.js';
 import createModal from './scripts/modalwindow/modal.js';
 import prepareInitSlotsInfo from './scripts/tables/initslotsinfo.js';
 import prepareShownSlotsInfo from './scripts/tables/shownslotsinfo.js';
-import initInterceptor from './scripts/interceptor.js';
+import initInterceptor from './scripts/interception/interceptor.js';
 
 initInterceptor();
 
